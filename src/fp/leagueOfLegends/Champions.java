@@ -1,8 +1,11 @@
 package fp.leagueOfLegends;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import fp.common.Ap;
 import fp.common.PositionEnum;
 import fp.utiles.Checkers;
 
@@ -16,15 +19,17 @@ public class Champions implements Comparable<Champions> {
 	private LocalDate releaseDate;
 	private PositionEnum positionEnum;
 	private Float speed;
+	private Ap ap;
+	private List<String> skins;
 
 //CONSTRUCTOR COMPLETO
 	public Champions(String name, Integer shield, Float healthPoint, Integer attackDamage, Boolean usemana,
-			LocalDate releaseDate, PositionEnum positionenum, Float speed) {
-		
-		
-		Checkers.check("El nombre no puede estar vacío",  //PRIMERA RESTRICCION, NOMBRE NO PUEDE ESTAR VACIO
+			LocalDate releaseDate, PositionEnum positionenum, Float speed, Ap ap, List<String> skins) {
+
+		Checkers.check("El nombre no puede estar vacío", // PRIMERA RESTRICCION, NOMBRE NO PUEDE ESTAR VACIO
 				!name.equals(""));
-		Checkers.check("El valor de healthPoint no puede ser inferior a 400",  //SEGUNDA RESTRICCION NO PUEDE SER MENOR A 400
+		Checkers.check("El valor de healthPoint no puede ser inferior a 400", // SEGUNDA RESTRICCION NO PUEDE SER MENOR
+																				// A 400
 				healthPoint > 400);
 		this.name = name;
 		this.shield = shield;
@@ -34,8 +39,9 @@ public class Champions implements Comparable<Champions> {
 		this.releaseDate = releaseDate;
 		this.positionEnum = positionEnum;
 		this.speed = speed;
-		
-		
+		this.ap = ap;
+		this.skins = skins;
+
 	}
 
 //CONSTRUCTOR VACIO
@@ -49,6 +55,8 @@ public class Champions implements Comparable<Champions> {
 		releaseDate = null;
 		positionEnum = null;
 		speed = null;
+		ap = null;
+		skins = new ArrayList<>();
 	}
 
 //GETTERS Y SETTERS
@@ -57,13 +65,12 @@ public class Champions implements Comparable<Champions> {
 	}
 
 	public void setName(String name) {
-		
-		Checkers.check("El nombre no puede estar vacío",  //MISMA RESTRICCION, NOMBRE NO PUEDE ESTAR VACIO
+
+		Checkers.check("El nombre no puede estar vacío", // MISMA RESTRICCION, NOMBRE NO PUEDE ESTAR VACIO
 				!name.equals(""));
-		
+
 		this.name = name;
-		
-		
+
 	}
 
 	public Integer getShield() {
@@ -79,10 +86,11 @@ public class Champions implements Comparable<Champions> {
 	}
 
 	public void setHealthPoint(Float healthPoint) {
-		
-		Checkers.check("El valor de healthPoint no puede ser inferior a 400",  //SEGUNDA RESTRICCION NO PUEDE SER MENOR A 400
+
+		Checkers.check("El valor de healthPoint no puede ser inferior a 400", // SEGUNDA RESTRICCION NO PUEDE SER MENOR
+																				// A 400
 				healthPoint > 400);
-		
+
 		this.healthPoint = healthPoint;
 	}
 
@@ -126,7 +134,23 @@ public class Champions implements Comparable<Champions> {
 		this.speed = speed;
 	}
 
-//PROPIEDAD DERIVADA PARA SABER SI EL CAMPEON ES RAPIDO O NO
+	public Ap getAp() {
+		return ap;
+	}
+
+	public void setAp(Ap ap) {
+		this.ap = ap;
+	}
+
+	public List<String> getSkins() {
+		return skins;
+	}
+
+	public void setSkins(List<String> skins) {
+		this.skins = skins;
+	}
+
+	// PROPIEDAD DERIVADA PARA SABER SI EL CAMPEON ES RAPIDO O NO
 	public Boolean getFast() {
 
 		Boolean res = true;
@@ -139,35 +163,34 @@ public class Champions implements Comparable<Champions> {
 
 	}
 
-//La representación como cadena, HACER COMO EN LA FOTO DE CLASE
+//Representacion como cadena
 	@Override
 	public String toString() {
 		return "Champions [name=" + name + ", shield=" + shield + ", healthPoint=" + healthPoint + ", attackDamage="
 				+ attackDamage + ", useMana=" + useMana + ", releaseDate=" + releaseDate + ", positionEnum="
-				+ positionEnum + ", speed=" + speed + "]";
+				+ positionEnum + ", speed=" + speed + ", ap=" + ap + ", skins=" + skins + "]";
 	}
 
-//El criterio de igualdad
+//CRITERIO DE IGUALDAD
 	@Override
 	public int hashCode() {
-		return Objects.hash(attackDamage, healthPoint, name, positionEnum, releaseDate, shield, speed, useMana);
+		return Objects.hash(ap, attackDamage, healthPoint, name, positionEnum, releaseDate, shield, skins, speed,
+				useMana);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-			}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-			}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-			}
 		Champions other = (Champions) obj;
-		return Objects.equals(attackDamage, other.attackDamage) && Objects.equals(healthPoint, other.healthPoint)
-				&& Objects.equals(name, other.name) && positionEnum == other.positionEnum
-				&& Objects.equals(releaseDate, other.releaseDate) && Objects.equals(shield, other.shield)
+		return Objects.equals(ap, other.ap) && Objects.equals(attackDamage, other.attackDamage)
+				&& Objects.equals(healthPoint, other.healthPoint) && Objects.equals(name, other.name)
+				&& positionEnum == other.positionEnum && Objects.equals(releaseDate, other.releaseDate)
+				&& Objects.equals(shield, other.shield) && Objects.equals(skins, other.skins)
 				&& Objects.equals(speed, other.speed) && Objects.equals(useMana, other.useMana);
 	}
 
@@ -192,7 +215,10 @@ public class Champions implements Comparable<Champions> {
 							if (r == 0) {
 								r = getPositionEnum().compareTo(o.getPositionEnum());
 								if (r == 0) {
-									r = getSpeed().compareTo(o.getSpeed());
+									r = getAp().compareTo(o.getAp());
+									if (r == 0) {
+										r = getSpeed().compareTo(o.getSpeed());
+									}
 								}
 							}
 						}
@@ -200,17 +226,10 @@ public class Champions implements Comparable<Champions> {
 				}
 			}
 		}
-			
-		
+
 		return r;
 	}
-	
-	
-	
-
 
 }
 
-//Preguntar si getters y setters, y to string, y equals se pueden hacer con el generate,
-	// y si criterio de igualdad es equal o hashcode y no encuentro utiidad para se puede hacer generando
-	// utiles y common,,,,, SOLO TIPO FECHA HACER
+//HAY QUE HACER CRITERIO DE IGUALDAD CON LA LISTA Y EL RECORD?
