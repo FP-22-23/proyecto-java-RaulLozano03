@@ -9,11 +9,9 @@ public class ChampionsTest {
 		
 		Champions c = new Champions();
 		System.out.println(c);
-				
-
-	}
-
-}
+		//CONSTRUCTORES
+				Champions p1 = new Champions("Aatrox", 101, 558.02 ,
+			
 
 
 //CONSTRUCTOR VACIO (PINTAR), SET DE TODOS, PINTAR LOS GET, CONSTRUCTOR COMPLETO, COMPARE TO
