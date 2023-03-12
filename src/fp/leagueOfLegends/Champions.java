@@ -8,7 +8,7 @@ import java.util.Objects;
 import fp.common.Ap;
 import fp.common.PositionEnum;
 import fp.utiles.Checkers;
-a
+
 public class Champions implements Comparable<Champions> {
 //ATRIBUTOS
 	private String name;
