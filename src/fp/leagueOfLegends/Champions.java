@@ -22,13 +22,13 @@ public class Champions implements Comparable<Champions> {
 	private Ap ap;
 	private List<String> skins;
 
-//CONSTRUCTOR COMPLETO
+//CONSTRUCTOR CON ALGUNOS ATRIBUTOS
 	public Champions(String name, Integer shield, Float healthPoint, Integer attackDamage, Boolean usemana,
-			LocalDate releaseDate, PositionEnum positionenum, Float speed, Ap ap, List<String> skins) {
+			LocalDate releaseDate, PositionEnum positionenum, Float speed) {
 
-		Checkers.check("El nombre no puede estar vacío", // PRIMERA RESTRICCION, NOMBRE NO PUEDE ESTAR VACIO
+		Checkers.check("El nombre no puede estar vacío", //RESTRICCION, NOMBRE NO PUEDE ESTAR VACIO
 				!name.equals(""));
-		Checkers.check("El valor de healthPoint no puede ser inferior a 400", // SEGUNDA RESTRICCION NO PUEDE SER MENOR
+		Checkers.check("El valor de healthPoint no puede ser inferior a 400", // SEGUNDA RESTRICCION, HEALTHPOINT NO PUEDE SER MENOR
 																				// A 400
 				healthPoint > 400);
 		this.name = name;
@@ -39,8 +39,8 @@ public class Champions implements Comparable<Champions> {
 		this.releaseDate = releaseDate;
 		this.positionEnum = positionEnum;
 		this.speed = speed;
-		this.ap = ap;
-		this.skins = skins;
+		//this.ap = ap;
+		//this.skins = skins;
 
 	}
 
@@ -66,7 +66,7 @@ public class Champions implements Comparable<Champions> {
 
 	public void setName(String name) {
 
-		Checkers.check("El nombre no puede estar vacío", // MISMA RESTRICCION, NOMBRE NO PUEDE ESTAR VACIO
+		Checkers.check("El nombre no puede estar vacío", //RESTRICCION, NOMBRE NO PUEDE ESTAR VACIO
 				!name.equals(""));
 
 		this.name = name;
@@ -87,7 +87,7 @@ public class Champions implements Comparable<Champions> {
 
 	public void setHealthPoint(Float healthPoint) {
 
-		Checkers.check("El valor de healthPoint no puede ser inferior a 400", // SEGUNDA RESTRICCION NO PUEDE SER MENOR
+		Checkers.check("El valor de healthPoint no puede ser inferior a 400", // SEGUNDA RESTRICCION HEALTHPOINT NO PUEDE SER MENOR
 																				// A 400
 				healthPoint > 400);
 
@@ -232,4 +232,3 @@ public class Champions implements Comparable<Champions> {
 
 }
 
-//HAY QUE HACER CRITERIO DE IGUALDAD CON LA LISTA Y EL RECORD?
