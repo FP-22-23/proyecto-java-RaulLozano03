@@ -5,7 +5,7 @@ import fp.leagueOfLegends.Champions;
 public class ChampionsTest {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		
 		Champions c = new Champions();
 		System.out.println(c);
