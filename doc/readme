@@ -12,6 +12,12 @@ Autor/a: Raúl Lozano Santervás   uvus:raulozsan
     * **PAQUETE fp.leagueOfLegends**
     * **fp.leagueOfLegends.Champions**: clase que contiene los tipos del proyecto.
     * **fp.leagueOfLegends.test.ChampionsTest**: clase que contiene las clases de test del proyecto.
+    * **fp.leagueOfLegends.Champion**: interfaz usada en el proyecto.
+    * **fp.leagueOfLegends.Contenedor**: clase que contiene todos los metodos relacionados con el contenedor.
+    * **fp.leagueOfLegends.Factoria**: clase que contiene la factoria para las lecturas del proyecto.
+    * **fp.leagueOfLegends.test.ContenedorTest**: clase que contiene los test del tipo contenedor.
+    * **fp.leagueOfLegends.test.FactoriaTest**: clase que contiene los test de la factoria.
+
   * **PAQUETE fp.common**
    * **fp.common.Ap**: contiene el record que usaré en el proyecto.
    * **fp.common.PositionEnum**: clase que contiene el enumerado del proyecto.
@@ -77,5 +83,45 @@ Los tipos que se han implementado en el proyecto son los siguientes:
 
 - PositionEnum, enumerado. Puede tomar los valores TOP, BOT, JNG, MID.
 - Ap, record. Se hace a partir de los Integer apMin y apMax del csv.
+
+### Factoria
+
+Esta clase del proyecto es usada para parsear los datos del csv y leerlos, gracias a las funciones realizadas en su interior
+
+-   Champions leeCampeon(String lineaCSV): lee el csv completo.
+-	Boolean parseaUseMana(String cadena): parsea a booleano el dato useMana del csv.
+-	List<Champions> leeCampeones(String nomfich): pasa a lista los datos de un campeon del csv.
+
+### Tipo Contenedor
+
+Esta clase contiene las funciones para obtener diferentes datos del csv..
+
+**Propiedades**:
+
+- champions, List<Champions>.
+
+
+**Constructores**: 
+
+- C1: Contenedor()
+- C2: Contenedor(Stream<Champions> champions).
+- C2: Contenedor(Collection<Champions> champions).
+
+
+
+
+**Criterio de igualdad**: Dos campeones son iguales si sus atributos lo son.
+
+**Otras operaciones**:
+ 
+-	Integer getSizeCampeones(): da el numero de campeones.
+-	void addCampeon(Champions campeon): añade un campeon.
+-	void addColleccion(Collection<Champions> c): añade una coleccion de campeones.
+-	void eliminarCampeon(Champions champion): elimina un campeon.
+-	Boolean existeCampeonPorAtaque(Integer attackDamage): nos devuelve true si existe un campeon con el attackDamage introducido.
+-	Integer campeonesPorPosicion(PositionEnum positionEnum): nos dice el numero de campeones que hay en la posicion indicada.
+-	List<String> campeonesUsanMana(): nos da la lista de campeones que usan mana.
+-	Map<PositionEnum, Set<String>> mapPropiedadBaseValorColeccion(): hace un map, teniendo como clave la posicion, da la lista de campeones que juegan en ella.
+-	Map<PositionEnum, Integer> mapPropiedadBaseValorSuma():  hace un map, teniendo como clave la posicion, asociandola a la suma total del attackDamage de los campeones de esa posicion.
 
 

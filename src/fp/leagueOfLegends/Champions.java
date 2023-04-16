@@ -24,7 +24,7 @@ public class Champions implements Comparable<Champions> {
 
 //CONSTRUCTOR CON ALGUNOS ATRIBUTOS
 	public Champions(String name, Integer shield, Float healthPoint, Integer attackDamage, Boolean usemana,
-			LocalDate releaseDate, PositionEnum positionenum, Float speed) {
+			LocalDate releaseDate, PositionEnum positionEnum, Float speed) {
 
 		Checkers.check("El nombre no puede estar vacío", //RESTRICCION, NOMBRE NO PUEDE ESTAR VACIO
 				!name.equals(""));
@@ -59,6 +59,31 @@ public class Champions implements Comparable<Champions> {
 		skins = new ArrayList<>();
 	}
 
+	//CONSTRUCTOR con todo
+	
+	public Champions(String name, Integer shield, Float healthPoint, Integer attackDamage, Boolean usemana,
+			LocalDate releaseDate, List<String> skins, PositionEnum positionEnum, Float speed, Ap ap) {
+
+		Checkers.check("El nombre no puede estar vacío", //RESTRICCION, NOMBRE NO PUEDE ESTAR VACIO
+				!name.equals(""));
+		Checkers.check("El valor de healthPoint no puede ser inferior a 400", // SEGUNDA RESTRICCION, HEALTHPOINT NO PUEDE SER MENOR
+																				// A 400
+				healthPoint > 400);
+		this.name = name;
+		this.shield = shield;
+		this.healthPoint = healthPoint;
+		this.attackDamage = attackDamage;
+		this.useMana = usemana;
+		this.releaseDate = releaseDate;
+		this.skins = skins;
+		this.positionEnum = positionEnum;
+		this.speed = speed;
+		this.ap = ap;
+		
+
+		
+
+	}
 //GETTERS Y SETTERS
 	public String getName() {
 		return name;
