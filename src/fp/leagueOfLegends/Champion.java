@@ -14,7 +14,7 @@ public interface Champion {
 	//	Numero de campeones.
 	Integer getSizeCampeones();
 
-	//	Anadir un campeon.
+	//	Anadir un campeon
 	void addCampeon(Champions c);
 
 	//	Añadir una colección de campeones.
