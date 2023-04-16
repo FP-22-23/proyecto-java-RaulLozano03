@@ -11,7 +11,7 @@ public interface Champion {
 	
 	List<Champions> getCampeones();
 
-	//	Numero de campeones.
+	//	Numero de campeones
 	Integer getSizeCampeones();
 
 	//	Anadir un campeon
