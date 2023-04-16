@@ -17,7 +17,7 @@ public interface Champion {
 	//	Anadir un campeon
 	void addCampeon(Champions c);
 
-	//	Añadir una colección de campeones.
+	//	Añadir una colección de campeones
 	void addColleccion(Collection<Champions> p);
 
 	//	Eliminar un campeon.
