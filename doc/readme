@@ -123,5 +123,13 @@ Esta clase contiene las funciones para obtener diferentes datos del csv..
 -	List<String> campeonesUsanMana(): nos da la lista de campeones que usan mana.
 -	Map<PositionEnum, Set<String>> mapPropiedadBaseValorColeccion(): hace un map, teniendo como clave la posicion, da la lista de campeones que juegan en ella.
 -	Map<PositionEnum, Integer> mapPropiedadBaseValorSuma():  hace un map, teniendo como clave la posicion, asociandola a la suma total del attackDamage de los campeones de esa posicion.
-
-
+-	Boolean existeCampeonPorAtaqueStream(Integer attackDamage): ve si existe un campeon con x ataque con stream
+-	Integer campeonesPorPosicionStream(PositionEnum positionEnum): da los campeones por posicion con stream.
+-	Set<String> campeonesUsanManaStream(): da los campeones que usan mana con stream.
+-	Champions getUseManaMaxAttackDamageStream(Boolean useMana): da los campeones que usan mana con el maxio de daño de ataque.
+-	List<Champions> getUseManaOrdenadoShieldStream(Boolean useMana): da los campeones que segun un filtro, ordena así el escudo.
+-	Map<PositionEnum, Set<String>> mapPropiedadBaseValorColeccionStream(): da un map de la posicion y los campeones q van a dicha posicion.
+-	Set<Integer> obtenerMediaStream(): da una media del ataque
+-	Map<String, Integer> mapNombreMaxAttackDamageStream(): da campeones con el maximo de ataque.
+-	SortedMap<PositionEnum, List<String>> sortedMapPositionEnumMaxNombreStream(Integer number): da un sortedMap con la posicion y una lista de strings.
+-	String championsWorstAttack(): calcula con stream el campeon con peor ataque-

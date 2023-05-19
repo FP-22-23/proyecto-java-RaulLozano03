@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import fp.common.Ap;
 import fp.common.PositionEnum;
@@ -65,5 +66,21 @@ public class Factoria {
 		}
 		return res;
 	}
+	
+	
+	
+	public static Contenedor leeCampeonStream(String rutaFichero) {
+        Contenedor res=null;
+        try {
+            Stream<Champions> s =Files.lines(Paths.get(rutaFichero)).skip(1).map(Factoria::parseaChampion);
+            res= new Contenedor(s);
+        }
+        catch(IOException e) {
+            System.out.println("No se ha encontrado el fichero"+ rutaFichero);
+        }
+        return res;
+
+    }
+
 
 }

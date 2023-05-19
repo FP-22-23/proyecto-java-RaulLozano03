@@ -3,12 +3,17 @@ package fp.leagueOfLegends;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,7 +41,7 @@ public class Contenedor implements Champion {
 	// Numero de campeones
 	@Override
 	public Integer getSizeCampeones() {
-		
+
 		return champions.size();
 	}
 
@@ -63,7 +68,7 @@ public class Contenedor implements Champion {
 
 	@Override
 	public List<Champions> getCampeones() {
-		
+
 		return champions;
 	}
 
@@ -127,7 +132,7 @@ public class Contenedor implements Champion {
 		return res;
 	}
 
-	//Map clave positionEnum, valores name
+	// Map clave positionEnum, valores name
 	@Override
 	public Map<PositionEnum, Set<String>> mapPropiedadBaseValorColeccion() {
 		Map<PositionEnum, Set<String>> res = new HashMap<>();
@@ -145,10 +150,11 @@ public class Contenedor implements Champion {
 		}
 		return res;
 	}
-	//Map clave positionEnum, valores suma attackDamage
+
+	// Map clave positionEnum, valores suma attackDamage
 	@Override
 	public Map<PositionEnum, Integer> mapPropiedadBaseValorSuma() {
-		
+
 		Map<PositionEnum, Integer> res = new HashMap<>();
 		for (Champions c : this.champions) {
 			if (!res.containsKey(c.getPositionEnum())) {
@@ -161,5 +167,87 @@ public class Contenedor implements Champion {
 			}
 		}
 		return res;
+	}
+
+	public Boolean existeCampeonPorAtaqueStream(Integer attackDamage) {
+		Boolean res = champions.stream().anyMatch(f -> f.getAttackDamage().equals(attackDamage));
+		return res;
+	}
+
+	public Integer campeonesPorPosicionStream(PositionEnum positionEnum) {
+		return (int) champions.stream().filter(c -> c.getPositionEnum().equals(positionEnum)).count();
+
+	}
+
+	public Set<String> campeonesUsanManaStream() {
+		Set<String> res = champions.stream().filter(c -> c.getUseMana().equals(true)).map(Champions::getName)
+				.collect(Collectors.toSet());
+		return res;
+	}
+
+	public Champions getUseManaMaxAttackDamageStream(Boolean useMana) {
+		Champions res = champions.stream().filter(c -> c.getUseMana().equals(useMana))
+				.max(Comparator.comparing(Champions::getAttackDamage)).orElse(null);
+		return res;
+	}
+
+	public List<Champions> getUseManaOrdenadoShieldStream(Boolean useMana) {
+		List<Champions> res = champions.stream().filter(e -> e.getUseMana().equals(useMana))
+				.sorted(Comparator.comparing(Champions::getShield)).collect(Collectors.toList());
+		return res;
+	}
+
+	public Map<PositionEnum, Set<String>> mapPropiedadBaseValorColeccionStream() {
+		return this.champions.stream().collect(Collectors.groupingBy(Champions::getPositionEnum,
+				Collectors.mapping(Champions::getName, Collectors.toSet())));
+	}
+
+	public Set<Integer> obtenerMediaStream() {
+		return champions.stream().collect(Collectors.mapping(Champions::getAttackDamage, Collectors.toSet()));
+
+	}
+
+	public Map<String, Integer> mapNombreMaxAttackDamageStream() {
+
+		Map<String, Set<Integer>> res = champions.stream()
+
+				.collect(Collectors.groupingBy(Champions::getName,
+						Collectors.mapping(Champions::getAttackDamage, Collectors.toSet())));
+
+		return res.entrySet().stream()
+
+				.collect(Collectors.toMap(
+
+						entry -> entry.getKey(),
+
+						entry -> Collections.max(entry.getValue())));
+
+	}
+	public SortedMap<PositionEnum, List<String>> sortedMapPositionEnumMaxNombreStream(Integer number) {
+	    TreeMap<PositionEnum, List<String>> collect = champions.stream()
+	            .collect(Collectors.groupingBy(Champions::getPositionEnum,
+	                    TreeMap::new,
+	                    Collectors.collectingAndThen(Collectors.toList(),
+	                            c -> sortedAndLimitByName(c, number))
+	            ));
+	    return new TreeMap<>(collect);
+
+	}
+
+	public List<String> sortedAndLimitByName(List<Champions> l, Integer n) {
+	    return
+	            l.stream()
+	                    .sorted(Comparator.comparing(Champions::getName))
+	                    .limit(n)
+	                    .map(Champions::getName)
+	                    .collect(Collectors.toList());
+	}
+
+	public String championsWorstAttack() {
+		Map<String, Set<Integer>> aux = champions.stream().collect(Collectors.groupingBy(Champions::getName,
+				Collectors.mapping(Champions::getAttackDamage, Collectors.toSet())));
+		return aux.entrySet().stream()
+				.min(Comparator.comparingInt(entry -> entry.getValue().stream().min(Integer::compareTo).get()))
+				.map(Map.Entry::getKey).orElse(null);
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import fp.leagueOfLegends.Champion;
 import fp.leagueOfLegends.Champions;
+import fp.leagueOfLegends.Contenedor;
 import fp.leagueOfLegends.Factoria;
 
 public class FactoriaTest {
@@ -12,7 +13,7 @@ public class FactoriaTest {
 		// TODO Auto-generated method stub
 		testLecturaFactoriaFichero("./data/champions.csv");
 		testLecturaFactoria("Amumu;104;546.93;80;true;12/25/2020;flowers;TOP;64.1;2;834");
-		
+		testLecturaFactoriaStream("./data/champions.csv");
 	}
 	//Lectura del fichero
 		private static void testLecturaFactoria(String fichero) {
@@ -26,6 +27,12 @@ public class FactoriaTest {
 			List<Champions> champions = Factoria.leeCampeones(fichero);
 			System.out.println("##Campeones## " + champions);
 
+		}
+		
+		private static void testLecturaFactoriaStream(String fichero) {
+			System.out.println("Test de la factoria con stream: ");
+			Contenedor contenedor = Factoria.leeCampeonStream(fichero);
+			System.out.println("##Campeones## "+ contenedor);
 		}
 
 }
